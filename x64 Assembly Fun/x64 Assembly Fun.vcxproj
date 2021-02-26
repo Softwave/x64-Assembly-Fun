@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="arithmetic.asm" />
+    <MASM Include="fibonacci.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

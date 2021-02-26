@@ -23,5 +23,8 @@
     <MASM Include="arithmetic.asm">
       <Filter>Source Files</Filter>
     </MASM>
+    <MASM Include="fibonacci.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
