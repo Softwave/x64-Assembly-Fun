@@ -11,6 +11,12 @@ DoubleSub proc
 	ret 
 DoubleSub endp 
 
+SumSub proc 
+	mov rax, rcx 
+	add rax, rdx 
+	ret 
+SumSub endp 
+
 SquareSub proc 
 	mov rax, rcx
 	mul rcx 
