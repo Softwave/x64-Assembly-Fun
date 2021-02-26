@@ -1,5 +1,5 @@
 ; FibCom64.asm, small command-line utility for finding nth fibonacci numbers 
-; Written in x86 assembly language 
+; Written in x64 assembly language 
 
 
 include \masm32\include64\masm64rt.inc 
@@ -20,6 +20,7 @@ Loopy:
 	jnz Loopy 
 	mov r12, ArgPointer
 
+	; Convert command line arg into number 
 	invoke vc__atoi64, qword ptr [r12] 
 	mov rcx, rax
     call FibonacciSub
