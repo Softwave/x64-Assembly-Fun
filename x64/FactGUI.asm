@@ -1,4 +1,4 @@
-; Work-in-progress program to display Fibonacci numbers in a GUI 
+; Work-in-progress program to display numbers factorial in a GUI 
 
     include C:\masm32\include64\masm64rt.inc
 
@@ -94,7 +94,7 @@ ListProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
             mov lbuf, ptr$(lbuffr)
             invoke SendMessage, hWin, LB_GETTEXT,csel,lbuf 
             inc csel 
-            mcat lbuf, "Fibonacci number: ", str$(csel)
+            mcat lbuf, "Factorial number: ", str$(csel)
             invoke MessageBox,hWin,lbuf,"You Selected",MB_OK
     .endsw 
 
