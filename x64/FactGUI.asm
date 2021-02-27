@@ -68,7 +68,7 @@ contloopo:
                 .case 101 
                     jmp exit_dialog
                 .case 102 
-                    invoke MessageBox,hWin, chr$("Program that graphically displays factorial numbers",13,10,"By Jessica Leyba, 2021",0), "About", MB_OK
+                    invoke MessageBox,hWin, chr$("Program that graphically displays numbers factorialized",13,10,"By Jessica Leyba, 2021",0), "About", MB_OK
                     
 
             .endsw 
