@@ -40,13 +40,14 @@ main proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
         ; Set font 
         mov hFont, rv(font_handle, "fixedsys", 9, 200)
         invoke SendMessage, hList, WM_SETFONT,hFont,TRUE
-        
+
 
         ; Setup input box 
         mov hEdit, rv(GetDlgItem, hWin, 103) 
 
         mov hFont, rv(font_handle, "fixedsys", 9, 200)
         invoke SendMessage, hEdit, WM_SETFONT, hFont, TRUE
+
 
         ; End setup input box 
 
@@ -92,6 +93,32 @@ EndZero:
         .case WM_CLOSE 
             exit_dialog:
                 invoke EndDialog,hWin,0
+
+        
+
+        .case WM_CTLCOLORDLG
+            rcall CreateSolidBrush,007B2FCCh
+            ret 
+
+        .case WM_CTLCOLORLISTBOX                  ; list box controls
+            rcall SetBkColor,wParam,00E1F0FFh
+            rcall SetTextColor,wParam,00000000h
+            rcall CreateSolidBrush,00E1F0FFh
+            ret
+
+        .case WM_CTLCOLOREDIT
+            rcall SetBkColor,wParam,00E1F0FFh
+            rcall SetTextColor,wParam,00000000h
+            rcall CreateSolidBrush,00E1F0FFh
+            ret
+
+            ; To-do, figure out owner-drawn buttons 
+        ;;.case WM_CTLCOLORBTN
+        ;;    rcall SetBkColor,wParam,00E1F0FFh
+        ;;    rcall SetTextColor,wParam,00000000h
+        ;;    rcall CreateSolidBrush,00E1F0FFh
+        ;;    ret 
+
     .endsw 
     .return 0
 main endp 
@@ -121,8 +148,23 @@ Print:
 FibonacciSub endp
 
 ListProc proc hWin:QWORD,uMsg:QWORD,wParam:QWORD,lParam:QWORD
-invoke CallWindowProc,lpListProc,hWin,uMsg,wParam,lParam
-    ret 
+    LOCAL csel  :QWORD
+    LOCAL lbuf  :QWORD
+    LOCAL lbuffr[64]:BYTE
+
+    .switch uMsg 
+        .case WM_LBUTTONDBLCLK
+            mov csel, rv(SendMessage, hWin, LB_GETCURSEL, 0, 0)
+            mov lbuf, ptr$(lbuffr)
+            invoke SendMessage, hWin, LB_GETTEXT,csel,lbuf 
+            inc csel 
+            mcat lbuf, "Fib ", str$(csel)
+            ;mcat lbuf, str$(csel),"th Fibonacci number"
+            invoke MessageBox,hWin,lbuf,"Fib Index",MB_OK
+    .endsw 
+
+    invoke CallWindowProc,lpListProc,hWin,uMsg,wParam,lParam
+    ret
 ListProc endp
 
 

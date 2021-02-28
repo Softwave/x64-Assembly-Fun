@@ -144,7 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <MASM Include="test.asm">
+    <MASM Include="FibGui.asm">
       <FileType>Document</FileType>
     </MASM>
   </ItemGroup>
